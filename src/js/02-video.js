@@ -1,17 +1,19 @@
 import Player from '@vimeo/player';
+import throttle from "lodash.throttle";
 
 //identificare element video
 const iframe = document.querySelector('#vimeo-player');
 const player = new Player(iframe);
 
 
-//identificare data-secundele din derulare si logarea in localStorage
-const onPlay = function(data) {
+//identificare data-secundele din derulare si logarea in localStorage +throttle
+const onPlay = throttle(function (data) {
     console.log(data);
     const currentTimeVideo = data.seconds;
     console.log(currentTimeVideo);
     localStorage.setItem("videoplayer-current-time", currentTimeVideo);
-};
+},1000);
+
 player.on('timeupdate', onPlay);
 
 //preluarea valoare secunde din localStorage 
