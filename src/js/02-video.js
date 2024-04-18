@@ -1,30 +1,36 @@
-import Player from "@vimeo/player";
+import Player from '@vimeo/player';
 
-const vid = document.querySelector('#vimeo-player');
-console.log(vid);
-const player = new Vimeo.Player(vid);
+//identificare element video
+const iframe = document.querySelector('#vimeo-player');
+const player = new Player(iframe);
 
-const onPlay = function (data) {
-    console.log("play")
-// Attach a "timeupdate" event to the video
-    vid.addEventListener("timeupdate", getCurTime);
-    console.log(vod.currentTime)
 
-// Display the current playback position of the video in a p element with id="demo"
-function getCurTime() { 
-    document.getElementById("demo").innerHTML = "The current playback position is " + vid.currentTime + " seconds.";
-    console.log("The current playback position is " + vid.currentTime + " seconds.")
-} 
-
-// Set the current playback position to 5 seconds
-// function setCurTime() { 
-//   vid.currentTime = 5;
-// } 
+//identificare data-secundele din derulare si logarea in localStorage
+const onPlay = function(data) {
+    console.log(data);
+    const currentTimeVideo = data.seconds;
+    console.log(currentTimeVideo);
+    localStorage.setItem("videoplayer-current-time", currentTimeVideo);
 };
+player.on('timeupdate', onPlay);
 
-player.on('play', onPlay);
+//preluarea valoare secunde din localStorage 
+const newStartTime = localStorage.getItem("videoplayer-current-time");
+console.log(newStartTime); 
 
 
-
+//reluarea redarii video de la secundele ramase
+player.setCurrentTime(newStartTime).then(function(seconds) {
+    // seconds = the actual time that the player seeked to
+}).catch(function(error) {
+    switch (error.name) {
+        case 'RangeError':
+            // the time was less than 0 or greater than the video’s duration
+            break;
+        default:
+            // some other error occurred
+            break;
+    }
+});
 
 
