@@ -7,8 +7,8 @@ const form = document.querySelector(".feedback-form");
 const localStorageKey = "feedback-form-state";
 
 //extragere valori
-inputData.value = " ";
-messageData.value = " ";
+inputData.value = "email";
+messageData.value = "message";
 let inputValues = { email: "", message: "" };
 
 const storageUpdate = throttle(function () {
