@@ -5,34 +5,20 @@ import throttle from "lodash.throttle";
 const iframe = document.querySelector('#vimeo-player');
 const player = new Player(iframe);
 
-
-//identificare data-secundele din derulare si logarea in localStorage +throttle
+//identificare secunde din derulare si logarea in localStorage + throttle 1 sec
 const onPlay = throttle(function (data) {
-    console.log(data);
+    console.log(data);//de verificare
     const currentTimeVideo = data.seconds;
-    console.log(currentTimeVideo);
+    console.log(currentTimeVideo); //de verificare
     localStorage.setItem("videoplayer-current-time", currentTimeVideo);
 },1000);
-
 player.on('timeupdate', onPlay);
 
 //preluarea valoare secunde din localStorage 
 const newStartTime = localStorage.getItem("videoplayer-current-time");
-console.log(newStartTime); 
-
+console.log(newStartTime); // de verificare
 
 //reluarea redarii video de la secundele ramase
-player.setCurrentTime(newStartTime).then(function(seconds) {
-    // seconds = the actual time that the player seeked to
-}).catch(function(error) {
-    switch (error.name) {
-        case 'RangeError':
-            // the time was less than 0 or greater than the video’s duration
-            break;
-        default:
-            // some other error occurred
-            break;
-    }
-});
+player.setCurrentTime(newStartTime);
 
 
