@@ -7,10 +7,12 @@ const form = document.querySelector(".feedback-form");
 const localStorageKey = "feedback-form-state";
 
 //extragere valori
+inputData.value = " ";
+messageData.value = " ";
 let inputValues = { email: "", message: "" };
 
 const storageUpdate = throttle(function () {
-    inputData.addEventListener("input", (event) => {
+inputData.addEventListener("input", (event) => {
     inputValues.email = event.currentTarget.value;
     console.log(inputValues);
     localStorage.setItem(localStorageKey, JSON.stringify(inputValues));
