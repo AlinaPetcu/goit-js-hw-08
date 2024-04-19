@@ -39,7 +39,7 @@ messageData.value = parsedInput.message ?? "...";
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
   localStorage.removeItem(localStorageKey);
-  console.log(inputValues);
+  console.log("email: ",inputData.value, "message: ", messageData.value);
   form.reset();
 });
 
