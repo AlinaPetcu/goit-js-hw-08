@@ -32,14 +32,14 @@ const parsedInput = JSON.parse(localStorage.getItem(localStorageKey));
 console.log(parsedInput); // de verificare
 
 //autofill cu valoare din localStorage
-inputData.value = parsedInput.email ?? "";
-messageData.value = parsedInput.message ?? "";
+inputData.value = parsedInput.email ?? "...";
+messageData.value = parsedInput.message ?? "...";
 
 
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
   localStorage.removeItem(localStorageKey);
-   console.log(inputValues);
+  console.log(inputValues);
   form.reset();
 });
 
