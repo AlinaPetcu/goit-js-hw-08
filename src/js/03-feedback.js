@@ -7,8 +7,6 @@ const form = document.querySelector(".feedback-form");
 const localStorageKey = "feedback-form-state";
 
 //extragere valori
-inputData.value = "email";
-messageData.value = "message";
 let inputValues = { email: "", message: "" };
 
 const storageUpdate = throttle(function () {
@@ -32,19 +30,22 @@ const parsedInput = JSON.parse(localStorage.getItem(localStorageKey));
 console.log(parsedInput); // de verificare
 
 //autofill cu valoare din localStorage
-inputData.value = parsedInput.email ?? "...";
-messageData.value = parsedInput.message ?? "...";
+inputData.value = parsedInput.email;
+messageData.value = parsedInput.message;
 
 
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
   localStorage.removeItem(localStorageKey);
-  console.log("email: ",inputData.value, "message: ", messageData.value);
+  let lastInputValues = { email: "", message: "" };
+  lastInputValues.email = inputData.value;
+   lastInputValues.message = messageData.value;
+  console.log(lastInputValues);
   form.reset();
 });
 
 
-
+``
 
 
 
